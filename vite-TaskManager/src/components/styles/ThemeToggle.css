@@ -1,0 +1,32 @@
+/* src/components/styles/ThemeToggle.css */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+  
+  .theme-toggle-button {
+    background-color: var(--card-background);
+    color: var(--color-details);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+  }
+  
+  .theme-toggle-button:hover {
+    transform: rotate(15deg);
+    box-shadow: 0 3px 8px var(--shadow-color);
+  }
+  
+  .theme-toggle-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }

@@ -1,0 +1,88 @@
+/* src/components/styles/Card.css */
+.task-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+  }
+  
+  .task-card.completed {
+    opacity: 0.8;
+    border-left: 4px solid var(--color-primary-dark);
+  }
+  
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .task-title {
+    color: var(--color-details);
+    margin: 0;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .task-card.completed .task-title {
+    text-decoration: line-through;
+    color: var(--color-details-light);
+  }
+  
+  .task-date {
+    font-size: var(--font-size-small);
+    color: var(--color-primary-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .task-description {
+    margin: 0.5rem 0;
+    color: var(--color-details-light);
+    font-size: var(--font-size);
+    line-height: 1.4;
+    min-height: 2.8rem;
+    transition: color 0.3s ease;
+  }
+  
+  .task-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .complete-btn, .delete-btn {
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .complete-btn {
+    background-color: var(--color-primary-light);
+    color: white;
+  }
+  
+  .complete-btn.completed {
+    background-color: #4CAF50;
+  }
+  
+  .complete-btn:hover {
+    background-color: var(--color-primary);
+  }
+  
+  .delete-btn {
+    background-color: var(--color-primary-darker);
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }

@@ -1,6 +1,14 @@
-.main-title{
+/* src/App.css */
+.app-container {
+    min-height: 100vh;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .main-title {
     text-align: center;
     font-size: var(--font-size-large);
     color: var(--color-details);
     margin-top: 2rem;
-}
+    transition: color 0.3s ease;
+  }

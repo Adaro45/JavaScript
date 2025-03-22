@@ -1,37 +1,82 @@
-:root{
-    --color-primary:#FF6107 ;
-    --color-primary-light: #f77f3a; ;
-    --color-primary-lighter: #ff9b5c; ;
-    --color-primary-dark: #E9290F; ;
-    --color-primary-darker: #C40018; ;
-    --background-color: #f7e6dc;
-    --color-details: #292725;
-    --color-details-light: #4d4b48;
-    --color-details-lighter: #6f6d6a;
+:root {
+    /* Common variables */
     --font-family: 'Poppins', sans-serif;
     --font-size: 1rem;
     --font-size-small: 0.8rem;
     --font-size-medium: 1.2rem;
     --font-size-large: 2rem;
+    
+    /* Light theme (default) */
+    --color-primary: #FF6107;
+    --color-primary-light: #f77f3a;
+    --color-primary-lighter: #ff9b5c;
+    --color-primary-dark: #E9290F;
+    --color-primary-darker: #C40018;
+    --background-color: #f7e6dc;
+    --card-background: #ffffff;
+    --color-details: #292725;
+    --color-details-light: #4d4b48;
+    --color-details-lighter: #6f6d6a;
+    --input-background: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --container-background: #ff9b5c;
 }
 
-html{
+/* Dark theme */
+body.dark-theme {
+    --color-primary: #FF6107;
+    --color-primary-light: #ff7a2d;
+    --color-primary-lighter: #ff9b5c;
+    --color-primary-dark: #E9290F;
+    --color-primary-darker: #C40018;
+    --background-color: #1e1e1e;
+    --card-background: #2d2d2d;
+    --color-details: #e0e0e0;
+    --color-details-light: #b0b0b0;
+    --color-details-lighter: #909090;
+    --input-background: #3d3d3d;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --container-background: #3d3d3d;
+}
+
+html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-family);
     background-color: var(--background-color);
+    transition: background-color 0.3s ease;
 }
-h1,h2,h3,h4,h5,h6,p{
+
+body {
+    transition: background-color 0.3s ease;
+    background-color: var(--background-color);
+    color: var(--color-details);
+}
+
+h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
+    transition: color 0.3s ease;
 }
-h1{
+
+h1 {
     font-size: var(--font-size-large);
+    color: var(--color-details);
 }
-h2{
+
+h2 {
     font-size: var(--font-size-medium);
+    color: var(--color-details);
 }
-h3{
+
+h3 {
     font-size: var(--font-size);
+    color: var(--color-details);
+}
+
+* {
+    box-sizing: border-box;
 }

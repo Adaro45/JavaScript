@@ -1,55 +1,156 @@
+/* src/components/styles/TaskContainer.css */
 .task-container {
     margin: auto;
     margin-top: 2rem;
-    width: 80%;
+    width: 90%;
+    max-width: 1200px;
     height: fit-content;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-    background-color: var(--color-primary-lighter);
+    gap: 2rem;
+    background-color: var(--container-background);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .task-list {
-    margin: 1rem;
-    margin-left: 2rem;
-    margin-right: auto;
+    flex: 3;
+    padding: 1rem;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    max-height: 70vh;
+    overflow-y: auto;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.tasks-ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+
+.no-tasks-message {
+    color: var(--color-details-light);
+    font-style: italic;
+    margin-top: 2rem;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .task-form {
-    margin: 1rem;
-    margin-right: 2rem;
-    margin-left: auto;
+    flex: 2;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-}
-.task-input{
+    gap: 1rem;
+    background-color: var(--card-background);
     border-radius: 8px;
-    border: none;
-    padding: 0.5rem;
-    width: 100%;
-    background-color: var(--background-color);
-    color: var(--color-details);
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
-.text-area{
-    height: 3rem;
 
+.task-input {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem;
+    width: 100%;
+    background-color: var(--input-background);
+    color: var(--color-details);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
-.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input{
-    background-color: var(--background-color) !important;
-    color: var(--color-details) !important;
-    }
-.css-jupps9-MuiInputBase-root-MuiOutlinedInput-root{
-        background-color: var(--color-primary-light) !important;
-    }
-.task-button{
+
+.task-input:focus {
+    outline: none;
+    border-color: var(--color-primary-dark);
+}
+
+.text-area {
+    height: 5rem;
+    resize: vertical;
+}
+
+.task-button {
+    margin-top: 1rem;
     border-radius: 8px;
     border: none;
-    padding: 0.5rem;
-    width: 50%;
+    padding: 0.8rem;
+    width: 100%;
     background-color: var(--color-primary-dark);
     color: white;
+    font-family: var(--font-family);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.task-button:hover {
+    background-color: var(--color-primary-darker);
+    transform: translateY(-2px);
+}
+
+.task-button:active {
+    transform: translateY(0);
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
+    .task-container {
+        flex-direction: column;
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .task-list, .task-form {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .task-list {
+        max-height: none;
+    }
+
+    .theme-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
 }
