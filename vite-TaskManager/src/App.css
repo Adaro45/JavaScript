@@ -1,0 +1,6 @@
+.main-title{
+    text-align: center;
+    font-size: var(--font-size-large);
+    color: var(--color-details);
+    margin-top: 2rem;
+}
