@@ -70,6 +70,7 @@ html {
   font-family: var(--font-family);
   background-color: var(--background-color);
   transition: background-color 0.3s ease;
+  font-size: 16px; /* Base font size */
 }
 
 body {
@@ -77,6 +78,9 @@ body {
   background-color: var(--background-color);
   color: var(--color-details);
   line-height: 1.5;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -177,5 +181,40 @@ h3 {
 
 .animate-pulse {
   animation: pulse 1.5s infinite;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  :root {
+    --font-size: 0.9375rem;
+    --font-size-small: 0.8125rem;
+    --font-size-medium: 1rem;
+    --font-size-large: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size: 0.875rem;
+    --font-size-small: 0.75rem;
+    --font-size-medium: 0.9375rem;
+    --font-size-large: 1.25rem;
+  }
+
+  /* Improve touch targets on small screens */
+  button,
+  input[type="checkbox"] + label,
+  .sidebar-item {
+    min-height: 44px;
+  }
+}
+
+/* Fix for iOS input zoom */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 

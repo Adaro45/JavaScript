@@ -109,6 +109,33 @@
   @media (max-width: 768px) {
     .sidebar {
       width: 250px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    .sidebar-header {
+      padding: 1.25rem;
+    }
+  
+    .sidebar-item {
+      padding: 0.875rem 1.25rem;
+    }
+  
+    /* Add a semi-transparent overlay when sidebar is open on mobile */
+    .sidebar.open::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 250px;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sidebar-item {
+      padding: 0.75rem 1rem;
     }
   }
   

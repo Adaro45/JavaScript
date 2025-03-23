@@ -189,6 +189,36 @@
     .task-meta {
       flex-direction: column;
       gap: 0.5rem;
+      align-items: flex-start;
+    }
+  
+    .task-card {
+      padding: 1rem;
+    }
+  
+    .task-title {
+      font-size: 1rem;
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .task-actions {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  
+    .task-header {
+      position: relative;
+      padding-right: 3.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .task-title {
+      max-width: 150px;
     }
   }
   

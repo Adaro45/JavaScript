@@ -117,6 +117,36 @@
     .task-form {
       max-width: none;
       width: 100%;
+      padding: 1.25rem;
+    }
+  
+    .task-button,
+    .cancel-button {
+      padding: 0.875rem;
+      font-size: 1rem;
+      height: 48px; /* Larger touch target */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .task-form {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  
+    .task-input {
+      padding: 0.625rem;
+      font-size: 16px; /* Prevent zoom on iOS */
+    }
+  
+    .form-actions {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+    }
+  
+    .task-button,
+    .cancel-button {
+      width: 100%;
     }
   }
   

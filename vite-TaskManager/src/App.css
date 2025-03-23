@@ -27,6 +27,8 @@
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 1px 3px var(--shadow-color);
     z-index: 10;
+    position: sticky;
+    top: 0;
   }
   
   .main-title {
@@ -62,12 +64,26 @@
   }
   
   @media (max-width: 768px) {
+    .app-layout.sidebar-open {
+      overflow: hidden;
+    }
+  
     .sidebar-open .main-content {
       transform: translateX(250px);
     }
   
     .main-title {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
+    }
+  
+    .app-header {
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-title {
+      font-size: 1.1rem;
     }
   }
   

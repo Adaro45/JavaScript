@@ -11,6 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import { useTheme } from "../contexts/ThemeContext"
 import { useTask } from "../contexts/TaskContext"
 import TaskForm from "./TaskForm"
+import { useState, useEffect } from "react"
 
 const TaskContainer: React.FC = () => {
   // Get the dark mode state from our theme context
@@ -18,6 +19,19 @@ const TaskContainer: React.FC = () => {
 
   // Get task context
   const { filteredTasks, searchTerm, setSearchTerm, sortBy, setSortBy } = useTask()
+
+  // State to track if we're on mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  // Update isMobile state on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   // Create a Material UI theme based on our dark mode state
   const muiTheme = createTheme({
@@ -32,6 +46,22 @@ const TaskContainer: React.FC = () => {
         styleOverrides: {
           root: {
             backgroundColor: darkMode ? "#374151" : "#ffffff",
+          },
+        },
+      },
+      // Make date picker more mobile friendly
+      MuiPickersDay: {
+        styleOverrides: {
+          root: {
+            fontSize: isMobile ? "14px" : "16px",
+            padding: isMobile ? "6px" : "8px",
+          },
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          input: {
+            fontSize: isMobile ? "16px" : "inherit", // Prevent zoom on iOS
           },
         },
       },
