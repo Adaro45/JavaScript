@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import "./App.css"
 import TaskContainer from "./components/TaskContainer"
 import ThemeToggle from "./components/ThemeToggle"
-import Sidebar from "./components/SideBar"
+import Sidebar from "./components/Sidebar"
 import { ThemeProvider } from "./contexts/ThemeContext"
 import { TaskProvider } from "./contexts/TaskContext"
 
