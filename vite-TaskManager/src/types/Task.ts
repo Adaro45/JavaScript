@@ -1,9 +1,13 @@
 // src/types/Task.ts
 export interface Task {
-    id: string;
-    title: string;
-    description: string;
-    dueDate: string | null; // We'll store dates as strings in localStorage
-    completed: boolean;
-    createdAt: string;
+    id: string
+    title: string
+    description: string
+    dueDate: string | null
+    completed: boolean
+    createdAt: string
+    priority?: "High" | "Medium" | "Low"
+    category?: string
   }
+  
+  

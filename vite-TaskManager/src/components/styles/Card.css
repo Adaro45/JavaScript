@@ -1,24 +1,79 @@
 /* src/components/styles/Card.css */
 .task-card {
     background-color: var(--card-background);
-    border-radius: 8px;
-    padding: 1rem;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px var(--shadow-color);
+    box-shadow: 0 1px 3px var(--shadow-color);
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--color-primary);
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .task-card:hover {
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transform: translateY(-2px);
   }
   
   .task-card.completed {
+    border-left-color: var(--color-success);
     opacity: 0.8;
-    border-left: 4px solid var(--color-primary-dark);
+  }
+  
+  .task-card.overdue {
+    border-left-color: var(--color-danger);
   }
   
   .task-header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+  
+  .task-title-row {
+    display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+  }
+  
+  .task-checkbox {
+    margin-right: 0.75rem;
+    position: relative;
+  }
+  
+  .task-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .task-checkbox label {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .task-checkbox input:checked + label {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+  }
+  
+  .task-checkbox input:checked + label:after {
+    content: "";
+    position: absolute;
+    left: 0.45rem;
+    top: 0.25rem;
+    width: 0.3rem;
+    height: 0.6rem;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
   }
   
   .task-title {
@@ -26,6 +81,7 @@
     margin: 0;
     font-weight: 600;
     transition: color 0.3s ease;
+    font-size: 1.1rem;
   }
   
   .task-card.completed .task-title {
@@ -33,56 +89,107 @@
     color: var(--color-details-light);
   }
   
-  .task-date {
-    font-size: var(--font-size-small);
-    color: var(--color-primary-dark);
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .task-description {
-    margin: 0.5rem 0;
-    color: var(--color-details-light);
-    font-size: var(--font-size);
-    line-height: 1.4;
-    min-height: 2.8rem;
-    transition: color 0.3s ease;
-  }
-  
   .task-actions {
     display: flex;
-    justify-content: flex-end;
     gap: 0.5rem;
-    margin-top: 0.5rem;
   }
   
-  .complete-btn, .delete-btn {
+  .edit-btn,
+  .delete-btn {
+    background: transparent;
     border: none;
-    border-radius: 4px;
-    padding: 0.4rem 0.8rem;
-    font-size: var(--font-size-small);
+    color: var(--color-details-lighter);
     cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s ease;
   }
   
-  .complete-btn {
-    background-color: var(--color-primary-light);
-    color: white;
-  }
-  
-  .complete-btn.completed {
-    background-color: #4CAF50;
-  }
-  
-  .complete-btn:hover {
-    background-color: var(--color-primary);
-  }
-  
-  .delete-btn {
-    background-color: var(--color-primary-darker);
-    color: white;
+  .edit-btn:hover {
+    color: var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.1);
   }
   
   .delete-btn:hover {
-    background-color: #d32f2f;
+    color: var(--color-danger);
+    background-color: rgba(var(--color-danger-rgb), 0.1);
   }
+  
+  .edit-btn svg,
+  .delete-btn svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .task-description {
+    margin: 0.75rem 0;
+    color: var(--color-details-light);
+    font-size: var(--font-size);
+    line-height: 1.5;
+    min-height: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    font-size: var(--font-size-small);
+  }
+  
+  .task-category,
+  .task-priority,
+  .task-date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--input-background);
+    color: var(--color-details-light);
+  }
+  
+  .task-category svg,
+  .task-priority svg,
+  .task-date svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  
+  .task-priority.priority-high {
+    background-color: rgba(var(--color-danger-rgb), 0.1);
+    color: var(--color-danger);
+  }
+  
+  .task-priority.priority-medium {
+    background-color: rgba(var(--color-warning-rgb), 0.1);
+    color: var(--color-warning);
+  }
+  
+  .task-priority.priority-low {
+    background-color: rgba(var(--color-success-rgb), 0.1);
+    color: var(--color-success);
+  }
+  
+  .task-date.overdue {
+    background-color: rgba(var(--color-danger-rgb), 0.1);
+    color: var(--color-danger);
+  }
+  
+  .days-remaining {
+    margin-left: 0.25rem;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 640px) {
+    .task-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  

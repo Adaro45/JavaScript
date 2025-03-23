@@ -1,155 +1,122 @@
+"use client"
+
 // src/components/TaskContainer.tsx
-import React, { useState, useEffect } from "react";
-import "./styles/TaskContainer.css";
-import Card from "./Card";
-import "react-datepicker/dist/react-datepicker.css";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import dayjs, { Dayjs } from 'dayjs';
-import { v4 as uuidv4 } from 'uuid';
-import { Task } from '../types/Task';
-import { getTasks, addTask, deleteTask, toggleTaskCompletion } from '../services/storageService';
-import { useTheme } from '../contexts/ThemeContext';
+import type React from "react"
+import "./styles/TaskContainer.css"
+import Card from "./Card"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
+import { useTheme } from "../contexts/ThemeContext"
+import { useTask } from "../contexts/TaskContext"
+import TaskForm from "./TaskForm"
 
 const TaskContainer: React.FC = () => {
   // Get the dark mode state from our theme context
-  const { darkMode } = useTheme();
+  const { darkMode } = useTheme()
+
+  // Get task context
+  const { filteredTasks, searchTerm, setSearchTerm, sortBy, setSortBy, taskToEdit } = useTask()
 
   // Create a Material UI theme based on our dark mode state
   const muiTheme = createTheme({
     palette: {
-      mode: darkMode ? 'dark' : 'light',
+      mode: darkMode ? "dark" : "light",
       primary: {
-        main: '#FF6107',
+        main: "#6366f1",
       },
     },
     components: {
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            backgroundColor: darkMode ? '#3d3d3d' : '#ffffff',
-          }
-        }
-      }
-    }
-  });
-
-  // State management
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
-
-  // Load tasks from localStorage on component mount
-  useEffect(() => {
-    const savedTasks = getTasks();
-    setTasks(savedTasks);
-  }, []);
-
-  // Handler for task completion toggle
-  const handleCompleteTask = (taskId: string) => {
-    const updatedTasks = toggleTaskCompletion(taskId);
-    setTasks(updatedTasks);
-  };
-
-  // Handler for task deletion
-  const handleDeleteTask = (taskId: string) => {
-    const updatedTasks = deleteTask(taskId);
-    setTasks(updatedTasks);
-  };
-
-  // Handler for form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate that at least title is provided
-    if (!title.trim()) {
-      alert('Please enter a task title');
-      return;
-    }
-    
-    // Create a new task object
-    const newTask: Task = {
-      id: uuidv4(), // Generate a unique ID
-      title: title.trim(),
-      description: description.trim(),
-      dueDate: dueDate ? dueDate.toISOString() : null,
-      completed: false,
-      createdAt: new Date().toISOString()
-    };
-    
-    // Add the task to localStorage and update state
-    const updatedTasks = addTask(newTask);
-    setTasks(updatedTasks);
-    
-    // Reset form fields
-    setTitle('');
-    setDescription('');
-    setDueDate(null);
-  };
+            backgroundColor: darkMode ? "#374151" : "#ffffff",
+          },
+        },
+      },
+    },
+  })
 
   return (
-    <div className="task-container">
-      <div className="task-list">
-        <h2>Tasks:</h2>
-        {tasks.length === 0 ? (
-          <p className="no-tasks-message">No tasks yet. Add one!</p>
-        ) : (
-          <ul className="tasks-ul">
-            {tasks.map(task => (
-              <li key={task.id}>
-                <Card 
-                  task={task} 
-                  onComplete={handleCompleteTask}
-                  onDelete={handleDeleteTask}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <form className="task-form" onSubmit={handleSubmit}>
-        <h2>Add Task:</h2>
-        <input
-          className="task-input"
-          type="text"
-          placeholder="Insert your task"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          className="task-input text-area"
-          placeholder="Insert your description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <MuiThemeProvider theme={muiTheme}>
-          <CssBaseline />
+    <MuiThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <div className="task-container">
+        <div className="task-controls">
+          <div className="search-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="search-icon"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          <div className="sort-container">
+            <label htmlFor="sort-select">Sort by:</label>
+            <select id="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="sort-select">
+              <option value="dueDate">Due Date</option>
+              <option value="priority">Priority</option>
+              <option value="title">Title</option>
+              <option value="createdAt">Created Date</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="task-content">
+          <div className="task-list">
+            {filteredTasks.length === 0 ? (
+              <div className="no-tasks-message">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="no-tasks-icon"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <p>No tasks found. Add a new task to get started!</p>
+              </div>
+            ) : (
+              <ul className="tasks-ul">
+                {filteredTasks.map((task) => (
+                  <li key={task.id} className="task-item">
+                    <Card task={task} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']} sx={{ width: '100%' }}>
-              <DatePicker 
-                label="Pick a due date" 
-                value={dueDate}
-                onChange={(newValue) => setDueDate(newValue)}
-                sx={{ 
-                  width: '100%'
-                }}
-              />
-            </DemoContainer>
+            <TaskForm />
           </LocalizationProvider>
-        </MuiThemeProvider>
+        </div>
+      </div>
+    </MuiThemeProvider>
+  )
+}
 
-        <button className="task-button" type="submit">
-          Add Task
-        </button>
-      </form>
-    </div>
-  );
-};
+export default TaskContainer
 
-export default TaskContainer;
