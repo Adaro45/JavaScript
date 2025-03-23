@@ -102,6 +102,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (!b.dueDate) return -1
           return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
         case "priority":
+            //eslint-disable-next-line
           const priorityOrder = { High: 0, Medium: 1, Low: 2 }
           return (priorityOrder[a.priority || "Low"] || 2) - (priorityOrder[b.priority || "Low"] || 2)
         case "title":

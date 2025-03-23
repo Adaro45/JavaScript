@@ -17,7 +17,7 @@ const TaskContainer: React.FC = () => {
   const { darkMode } = useTheme()
 
   // Get task context
-  const { filteredTasks, searchTerm, setSearchTerm, sortBy, setSortBy, taskToEdit } = useTask()
+  const { filteredTasks, searchTerm, setSearchTerm, sortBy, setSortBy } = useTask()
 
   // Create a Material UI theme based on our dark mode state
   const muiTheme = createTheme({
