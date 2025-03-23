@@ -1,6 +1,6 @@
 "use client"
 
-// src/components/Sidebar.tsx
+// src/components/SideBar.tsx
 import type React from "react"
 import "./styles/Sidebar.css"
 import { useTask } from "../contexts/TaskContext"
