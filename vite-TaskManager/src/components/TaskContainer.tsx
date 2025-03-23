@@ -49,15 +49,7 @@ const TaskContainer: React.FC = () => {
           },
         },
       },
-      // Make date picker more mobile friendly
-      MuiPickersDay: {
-        styleOverrides: {
-          root: {
-            fontSize: isMobile ? "14px" : "16px",
-            padding: isMobile ? "6px" : "8px",
-          },
-        },
-      },
+      // Make inputs more mobile friendly
       MuiInputBase: {
         styleOverrides: {
           input: {
